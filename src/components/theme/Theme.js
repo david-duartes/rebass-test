@@ -1,10 +1,20 @@
 import React from "react";
-import { ThemeProvider } from "emotion-theming";
-// import theme from "@rebass/preset";
-import theme from "@rebass/preset-material";
+import PropTypes from 'prop-types'
 
-const Theme = (props) => {
-  return <ThemeProvider theme={theme}>{props.children}</ThemeProvider>;
+const Theme = ({ handleThemeChange }) => {
+  return (
+    <>
+      <select onChange={handleThemeChange}>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </>
+  );
 };
+
+Theme.propTypes = {
+  handleThemeChange: PropTypes.func.isRequired
+}
+
 
 export default Theme;

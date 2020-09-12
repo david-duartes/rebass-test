@@ -1,36 +1,57 @@
-import React, { Component } from "react";
-import "./App.style.scss";
-import { Button, Box, Flex, Text, Heading, Card } from "rebass";
-import Theme from "./theme/Theme";
+import { Box } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import React, { useState } from "react";
+import { ThemeProvider } from "styled-components";
+import GlobalStyles from "../styles/global/GlobalStyles";
+import { light } from "../styles/theme/Theme";
+import ThemeContainer from "./theme/ThemeContainer";
+import SignupForm from "./forms/SignupForm";
 
-export class App extends Component {
-  render() {
-    return (
-      <Theme>
-        <Heading fontSize={[5, 6, 7]} color="primary">
-          Hello!!!
-        </Heading>
-        <Flex flexWrap="wrap">
-          <Box p={2} fontSize={4} width={[1, 1 / 2]} color="white" bg="silver">
-            <Button variant="primary" mr={2}>
-              Primary
-            </Button>
-            <Button variant="outline" mr={2}>
-              Outline
-            </Button>
+const App = () => {
+  const [theme, setTheme] = useState(light);
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <Grid container>
+        <Grid item xs={6}>
+          <Box
+            display="flex"
+            alignItems="center"
+            height="8vh"
+            px={2}
+            bgcolor={theme.colors.primary}
+            color={theme.colors.secundary}
+          >
+            <h1>Test</h1>
           </Box>
-          <Box p={2} fontSize={4} width={[1, 1 / 2]} color="white" bg="blue">
-            <Text fontSize={[3, 4, 5]} color="secundary">
-              Full
-            </Text>
+        </Grid>
+        <Grid item xs={6}>
+          <Box
+            display="flex"
+            height="100%"
+            alignItems="center"
+            justifyContent="flex-end"
+            px={2}
+            bgcolor={theme.colors.primary}
+            color={theme.colors.secundary}
+          >
+            <ThemeContainer setTheme={setTheme} />
           </Box>
-        </Flex>
-        <Card width={256} width={[1, 1 / 2]}>
-          <Heading>Card</Heading>
-        </Card>
-      </Theme>
-    );
-  }
-}
+        </Grid>
+        <Grid item xs={12}>
+          <Box
+            display="flex"
+            height="92vh"
+            alignItems="center"
+            justifyContent="center"
+            px={2}
+          >
+            <SignupForm />
+          </Box>
+        </Grid>
+      </Grid>
+    </ThemeProvider>
+  );
+};
 
 export default App;
